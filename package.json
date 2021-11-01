@@ -2,5 +2,9 @@
   "name": "airx",
   "version": "0.0.1",
   "author": "Dominick Brasileiro <brasileiro.dominick@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "typescript": "^4.4.4"
+  }
 }
