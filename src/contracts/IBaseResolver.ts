@@ -1,8 +1,8 @@
 export interface IBaseResolver {
   Query: {
-    [key: string]: () => unknown;
+    [key: string]: (...args: any[]) => any;
   };
   Mutation: {
-    [key: string]: () => unknown;
+    [key: string]: (...args: any[]) => any;
   };
 }
