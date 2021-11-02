@@ -1,6 +1,6 @@
 import { IBaseResolver } from '../../../contracts/IBaseResolver';
 import { IMutationArgsData } from '../../../contracts/IMutationArgsData';
-import { registerUser } from '../../../services/users/registerUser';
+import { userService } from '../../../services/users';
 import { IRegisterUserInput } from './inputs';
 
 const userResolvers: IBaseResolver = {
@@ -9,7 +9,7 @@ const userResolvers: IBaseResolver = {
     registerUser: (_, args: IMutationArgsData<IRegisterUserInput>) => {
       const { email, password, firstName, lastName } = args.data;
 
-      return registerUser({
+      return userService.registerUser({
         email,
         password,
         firstName,
