@@ -1,3 +1,6 @@
+import { User } from '.prisma/client';
+import { prisma } from '../../database/prisma';
+
 interface IRequest {
   email: string;
   password: string;
@@ -5,6 +8,21 @@ interface IRequest {
   lastName: string;
 }
 
-export const registerUser = (data: IRequest): any => {
-  return data;
+export const registerUser = async ({
+  email,
+  password,
+  firstName,
+  lastName,
+}: IRequest): Promise<User> => {
+  const user = await prisma.user.create({
+    data: {
+      email,
+      // TODO: hash password before insert
+      passwordHash: password,
+      firstName,
+      lastName,
+    },
+  });
+
+  return user;
 };
