@@ -1,6 +1,11 @@
+type RefreshToken {
+  token: String!
+  expiration: String!
+}
+
 type AuthenticateUserResponse {
   user: User!
-  refreshToken: String!
+  refreshToken: RefreshToken!
 }
 
 type Mutation {

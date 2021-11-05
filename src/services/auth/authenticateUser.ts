@@ -1,4 +1,4 @@
-import { User } from '.prisma/client';
+import { RefreshToken, User } from '.prisma/client';
 import { authService } from '.';
 import { prisma } from '../../database/prisma';
 import { ApplicationError } from '../../errors/ApplicationError';
@@ -11,7 +11,7 @@ interface IRequest {
 
 interface IResponse {
   user: User;
-  refreshToken: string;
+  refreshToken: RefreshToken;
 }
 
 export const authenticateUser = async ({

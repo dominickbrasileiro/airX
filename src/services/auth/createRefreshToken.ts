@@ -1,5 +1,6 @@
-import { UserTokenType } from '.prisma/client';
+import { RefreshToken } from '.prisma/client';
 import { prisma } from '../../database/prisma';
+import { dateUtils } from '../../utils/date';
 import { securityService } from '../security';
 
 interface IRequest {
@@ -8,16 +9,18 @@ interface IRequest {
 
 export const createRefreshToken = async ({
   userId,
-}: IRequest): Promise<string> => {
-  const generatedToken = await securityService.generateToken();
+}: IRequest): Promise<RefreshToken> => {
+  const token = await securityService.generateToken();
 
-  const refreshToken = await prisma.userToken.create({
+  const expiration = await dateUtils.addDays(360);
+
+  const refreshToken = await prisma.refreshToken.create({
     data: {
       userId,
-      type: UserTokenType.refreshToken,
-      token: generatedToken,
+      token,
+      expiration,
     },
   });
 
-  return refreshToken.token;
+  return refreshToken;
 };
