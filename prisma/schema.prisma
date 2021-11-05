@@ -21,3 +21,17 @@ model User {
 
   @@map("users")
 }
+
+model UserToken {
+  id            String  @id @default(uuid())
+  userId        String
+  type          UserTokenType
+  token         String @unique
+  createdAt     DateTime @default(now())
+
+  @@map("user_tokens")
+}
+
+enum UserTokenType {
+  refreshToken
+}
