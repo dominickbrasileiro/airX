@@ -1,8 +1,8 @@
 import { RefreshToken, User } from '.prisma/client';
 import { authService } from '.';
-import { prisma } from '../../database/prisma';
 import { ApplicationError } from '../../errors/ApplicationError';
 import { securityService } from '../security';
+import { userService } from '../users';
 
 interface IRequest {
   email: string;
@@ -18,9 +18,7 @@ export const authenticateUser = async ({
   email,
   password,
 }: IRequest): Promise<IResponse> => {
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
+  const user = await userService.findActiveUserByEmail({ email });
 
   if (!user) {
     throw new ApplicationError('Invalid credentials');
