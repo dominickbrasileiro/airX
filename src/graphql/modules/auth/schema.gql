@@ -1,0 +1,13 @@
+type AuthenticateUserResponse {
+  user: User!
+  refreshToken: String!
+}
+
+type Mutation {
+  authenticateUser(data: AuthenticateUserInput): AuthenticateUserResponse
+}
+
+input AuthenticateUserInput {
+  email: String!
+  password: String!
+}
